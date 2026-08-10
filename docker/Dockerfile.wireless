@@ -1,0 +1,24 @@
+# Wireless module image. Linux-only: requires monitor-mode USB adapter passed
+# through to the container (e.g. docker run --device=/dev/bus/usb) and the
+# host kernel supporting monitor mode via mac80211.
+FROM python:3.12-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    aircrack-ng \
+    wireless-tools \
+    iw \
+    usbutils \
+    net-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/ ./backend/
+
+WORKDIR /app/backend
+
+ENTRYPOINT ["python", "-m", "wireless.cli"]
+CMD ["--help"]

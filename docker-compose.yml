@@ -1,0 +1,16 @@
+services:
+  core:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.core
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - iot_data:/app/backend/data
+    environment:
+      IOT_DB_PATH: /app/backend/data/iot_sentinel.db
+      SECRETS_ENCRYPTION_KEY_PATH: /app/backend/data/.secrets.key
+
+volumes:
+  iot_data:

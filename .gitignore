@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*.egg-info/
+
+# Environment & secrets
+.env
+backend/.secrets.key
+*.secrets.key
+
+# Database & caches
+*.db
+backend/iot_sentinel.db
+backend/.cve_cache/
+
+# Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Reports / output (HTML reports are served on demand, not written to disk)
+reports/
+*.pdf
+
+# Test cache
+.pytest_cache/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Local editor/tooling that shouldn't leak into the repo
+.claude/settings.local.json
+.claude/.credentials*
