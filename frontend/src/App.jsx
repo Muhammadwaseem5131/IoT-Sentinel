@@ -156,7 +156,7 @@ export default function App() {
       <main className="main">
       {tab === 'dashboard' && (
         <>
-          <ScanForm onScan={handleScan} onDemo={() => handleScan('demo', false)} disabled={scanning} />
+          <ScanForm onScan={handleScan} disabled={scanning} />
 
           {progress && (
             <div className="card">

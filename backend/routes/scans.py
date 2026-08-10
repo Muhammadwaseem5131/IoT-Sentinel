@@ -35,14 +35,10 @@ class WirelessRequest(BaseModel):
 @router.post("/scans")
 def start_scan(req: ScanRequest):
     """Starts a scan. Returns immediately; the scan runs in the background and
-    progress is polled via GET /scans/{id}. Subnet 'demo' seeds sample data."""
+    progress is polled via GET /scans/{id}."""
     from db import models
 
     subnet_input = req.subnet.strip()
-    if subnet_input.lower() == "demo":
-        from core.demo_data import seed_demo_scan
-        return {"scan_id": seed_demo_scan(), "status": "completed"}
-
     try:
         subnet = validate_subnet(subnet_input)
     except ValueError as exc:

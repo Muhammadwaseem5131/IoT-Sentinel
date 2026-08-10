@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function ScanForm({ onScan, onDemo, disabled }) {
+export default function ScanForm({ onScan, disabled }) {
   const [subnet, setSubnet] = useState('')
   const [testCreds, setTestCreds] = useState(false)
 
@@ -11,12 +11,7 @@ export default function ScanForm({ onScan, onDemo, disabled }) {
 
   return (
     <div className="card">
-      <div className="section-title">
-        <h3>New Scan</h3>
-        <button className="subtle" type="button" onClick={onDemo} disabled={disabled}>
-          ▶ Load sample data
-        </button>
-      </div>
+      <h3>New Scan</h3>
       <form className="row" onSubmit={submit} style={{ marginTop: 14 }}>
         <input
           type="text"
@@ -36,8 +31,7 @@ export default function ScanForm({ onScan, onDemo, disabled }) {
         </button>
       </form>
       <p className="status" style={{ marginBottom: 0, marginTop: 12 }}>
-        Only scan networks you own or are authorized to test. No hardware? Use <strong>sample data</strong> to
-        explore the dashboard.
+        Only scan networks you own or are authorized to test.
       </p>
     </div>
   )

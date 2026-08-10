@@ -1,6 +1,25 @@
-# IoT-Sentinel
+<div align="center">
 
-### AI-Assisted IoT Vulnerability & Exposure Scanner
+# 🛡️ IoT-Sentinel
+
+### AI-Assisted IoT Vulnerability &amp; Exposure Scanner
+
+Find the vulnerable devices on your network, understand why they matter,<br/>
+and get told exactly how to fix them in plain language.
+
+<img src="https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white" alt="Python 3.12" />
+<img src="https://img.shields.io/badge/FastAPI-backend-009688?logo=fastapi&logoColor=white" alt="FastAPI" />
+<img src="https://img.shields.io/badge/React-dashboard-61DAFB?logo=react&logoColor=black" alt="React" />
+<img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License" />
+<img src="https://img.shields.io/badge/tests-67%20passing-brightgreen" alt="67 tests passing" />
+
+<br/><br/>
+
+<img src="docs/screenshots/dashboard.png" alt="IoT-Sentinel dashboard showing discovered devices, risk overview, and wireless findings" width="900" />
+
+</div>
+
+---
 
 IoT-Sentinel scans a network for IoT devices, correlates what it finds against known
 vulnerability data, checks internet exposure and default credentials, optionally audits
@@ -10,14 +29,61 @@ prioritized risk report for people who aren't security engineers.
 It **does not reinvent scanning technology**. It orchestrates proven tools (`nmap`,
 `aircrack-ng`, NVD's CVE database) and adds the layer that's missing in the open-source
 space: correlation across data sources, IoT-specific risk scoring, and human-readable
-reporting — the sort of thing Nessus or Nozomi do, but free and IoT-focused for NGOs,
+reporting. The sort of thing Nessus or Nozomi do, but free and IoT-focused for NGOs,
 schools, and home users.
 
-> **Try it in 30 seconds, no hardware needed:** start the app and click **"Load sample
-> data"** on the dashboard (or scan the subnet `demo`). It seeds a realistic network so you
-> can explore the whole tool without scanning anything.
+## Screenshots
 
-## Legal & ethics notice
+> All screenshots use a fictional sample network. No real device data is shown.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**Device detail: what's wrong and how to fix it**
+
+<img src="docs/screenshots/device-detail.png" alt="Device detail modal listing open ports and two critical vulnerabilities" />
+
+Every device opens into its open ports, matched CVEs, and severity-ranked findings, with a
+one-click plain-language explanation and remediation steps.
+
+</td>
+<td width="50%" valign="top">
+
+**Wireless audit with live radar**
+
+<img src="docs/screenshots/wireless.png" alt="Wireless tab showing adapter status, radar visualization, and five detected networks" />
+
+Monitor-mode adapter detection, passive network discovery, and gated active tests for WPS
+and PMKID exposure. Weak encryption, rogue APs, and factory-default SSIDs are flagged.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**Network map with hover preview**
+
+<img src="docs/screenshots/network-map.png" alt="Hierarchy tree of the scanned subnet with a hover preview card" />
+
+The scanned subnet as a hierarchy. Hover any node for a live preview, click to open the
+full device report.
+
+</td>
+<td width="50%" valign="top">
+
+**Light and dark themes**
+
+<img src="docs/screenshots/light-theme.png" alt="The same dashboard rendered in light theme" />
+
+The whole dashboard is theme-aware and follows your system preference, with a manual
+override in the sidebar.
+
+</td>
+</tr>
+</table>
+
+## Legal &amp; ethics notice
 
 > This tool is for auditing networks and devices you own or have explicit written
 > authorization to test. Passive wireless sniffing and active vulnerability scanning of
@@ -67,7 +133,6 @@ Honest breakdown of what's built, partial, or planned — verified against the c
 
 ### ⬜ Planned
 
-- Scan history diffing / trend visualization
 - OS keychain integration for API keys
 - Native `.exe` packaging (PyInstaller)
 - Firmware / EOL version checking
@@ -132,7 +197,7 @@ npm install
 npm run dev        # dev server on :3000, proxies /api to :8000
 ```
 
-Open `http://localhost:3000` and click **Load sample data**.
+Open `http://localhost:3000`, enter your subnet (e.g. `192.168.1.0/24`), and start a scan.
 
 ### Wireless module (Linux only)
 
@@ -159,7 +224,7 @@ The **printable HTML report** works with no provider at all.
 
 ```
 GET    /api/health
-POST   /api/scans                      { subnet, test_creds? }   (subnet "demo" seeds sample data)
+POST   /api/scans                      { subnet, test_creds? }
 GET    /api/scans                      list scans (with status/progress)
 GET    /api/scans/{id}                 scan + devices + findings
 GET    /api/scans/{id}/report          AI-generated risk report
